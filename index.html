@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PC Control</title>
+
+<link
+    rel="stylesheet"
+    href="/web/style.css"
+>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     ЭКРАН ВХОДА
+     ========================================================= -->
+
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-card glass">
+
+        <div class="login-logo">
+            🖥️
+        </div>
+
+        <div class="login-title">
+            PC Control
+        </div>
+
+        <div class="login-subtitle">
+            Панель управления компьютером
+        </div>
+
+        <form id="loginForm">
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Пароль"
+                autocomplete="current-password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Войти
+            </button>
+
+        </form>
+
+        <div
+            id="loginError"
+            class="error-text"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ОСНОВНОЕ ПРИЛОЖЕНИЕ
+     ========================================================= -->
+
+<div
+    id="app"
+    class="app hidden"
+>
+
+    <!-- =====================================================
+         ШАПКА
+         ===================================================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🖥️
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+                    PC Control
+                </div>
+
+                <div
+                    id="hostname"
+                    class="brand-host"
+                >
+                    Подключение...
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <div class="connection-status">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    ONLINE
+                </span>
+
+            </div>
+
+            <button
+                id="logoutButton"
+                class="secondary-button"
+            >
+                Выйти
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         ОСНОВНОЙ КОНТЕНТ
+         ===================================================== -->
+
+    <main class="container">
+
+        <!-- HERO -->
+
+        <section class="hero glass">
+
+            <div>
+
+                <div class="eyebrow">
+                    SYSTEM DASHBOARD
+                </div>
+
+                <h1>
+                    Управление компьютером
+                </h1>
+
+                <p>
+                    Мониторинг Windows и управление системой
+                    через единую панель.
+                </p>
+
+            </div>
+
+            <div class="hero-computer">
+                🖥️
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             СТАТИСТИКА
+             ================================================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card glass">
+
+                <div class="stat-label">
+                    CPU
+                </div>
+
+                <div
+                    id="cpu"
+                    class="stat-value"
+                >
+                    —
+                </div>
+
+                <div class="progress">
+                    <span id="cpuBar"></span>
+                </div>
+
+                <div class="stat-description">
+                    Загрузка процессора
+                </div>
+
+            </div>
+
+
+            <div class="stat-card glass">
+
+                <div class="stat-label">
+                    RAM
+                </div>
+
+                <div
+                    id="ram"
+                    class="stat-value"
+                >
+                    —
+                </div>
+
+                <div class="progress">
+                    <span id="ramBar"></span>
+                </div>
+
+                <div
+                    id="ramText"
+                    class="stat-description"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="stat-card glass">
+
+                <div class="stat-label">
+                    UPTIME
+                </div>
+
+                <div
+                    id="uptime"
+                    class="stat-value uptime-value"
+                >
+                    —
+                </div>
+
+                <div class="stat-description">
+                    Время работы системы
+                </div>
+
+            </div>
+
+
+            <div class="stat-card glass">
+
+                <div class="stat-label">
+                    ПОТОКИ
+                </div>
+
+                <div
+                    id="cores"
+                    class="stat-value"
+                >
+                    —
+                </div>
+
+                <div class="stat-description">
+                    Логических процессоров
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             СЕТКА ПАНЕЛЕЙ
+             ================================================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- =================================================
+                 ПИТАНИЕ
+                 ================================================= -->
+
+            <div class="panel glass">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            ⚡ Питание
+                        </h2>
+
+                        <span>
+                            WINDOWS
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="power-grid">
+
+                    <button
+                        class="control-button danger"
+                        data-action="shutdown"
+                    >
+                        <strong>
+                            🔴 Выключить
+                        </strong>
+
+                        <small>
+                            Через 5 секунд
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="control-button"
+                        data-action="restart"
+                    >
+                        <strong>
+                            🔄 Перезагрузка
+                        </strong>
+
+                        <small>
+                            Через 5 секунд
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="control-button"
+                        data-action="sleep"
+                    >
+                        <strong>
+                            💤 Сон
+                        </strong>
+
+                        <small>
+                            Спящий режим
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="control-button"
+                        data-action="lock"
+                    >
+                        <strong>
+                            🔒 Блокировка
+                        </strong>
+
+                        <small>
+                            Заблокировать Windows
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        class="control-button"
+                        data-action="cancel"
+                    >
+                        <strong>
+                            ❌ Отмена
+                        </strong>
+
+                        <small>
+                            Отменить выключение
+                        </small>
+
+                    </button>
+
+                </div>
+
+            </div>
+  
+<!-- =================================================
+     УПРАВЛЕНИЕ WINDOWS
+     ================================================= -->
+
+<div class="panel glass">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                🛠 Управление
+            </h2>
+
+            <span>
+                CONTROL
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="control-grid">
+
+        <!-- ЗВУК -->
+
+        <button
+            class="control-button"
+            data-action="mute"
+        >
+
+            <strong>
+                🔇 Звук
+            </strong>
+
+            <small>
+                Вкл / выкл звук
+            </small>
+
+        </button>
+
+
+        <!-- СВЕРНУТЬ ВСЁ -->
+
+        <button
+            class="control-button"
+            data-action="minimize"
+        >
+
+            <strong>
+                🗕 Свернуть всё
+            </strong>
+
+            <small>
+                Свернуть все окна
+            </small>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =================================================
+     ПРИЛОЖЕНИЯ
+     ================================================= -->
+
+<div class="panel glass wide">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                🚀 Приложения
+            </h2>
+
+            <span>
+                APPLICATIONS
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="apps-grid">
+
+        <button
+            class="control-button"
+            data-action="app_browser"
+        >
+
+            <strong>
+                🌐 Браузер
+            </strong>
+
+            <small>
+                Открыть браузер
+            </small>
+
+        </button>
+
+
+        <button
+            class="control-button"
+            data-action="app_explorer"
+        >
+
+            <strong>
+                📁 Проводник
+            </strong>
+
+            <small>
+                Открыть проводник
+            </small>
+
+        </button>
+
+
+        <button
+            class="control-button"
+            data-action="app_notepad"
+        >
+
+            <strong>
+                📝 Блокнот
+            </strong>
+
+            <small>
+                Открыть Notepad
+            </small>
+
+        </button>
+
+
+        <button
+            class="control-button"
+            data-action="app_calc"
+        >
+
+            <strong>
+                🧮 Калькулятор
+            </strong>
+
+            <small>
+                Открыть Calculator
+            </small>
+
+        </button>
+
+
+        <button
+            class="control-button"
+            data-action="app_cmd"
+        >
+
+            <strong>
+                💻 CMD
+            </strong>
+
+            <small>
+                Командная строка
+            </small>
+
+        </button>
+
+
+        <button
+            class="control-button"
+            data-action="app_powershell"
+        >
+
+            <strong>
+                ⚡ PowerShell
+            </strong>
+
+            <small>
+                PowerShell
+            </small>
+
+        </button>
+
+    </div>
+
+</div>
+
+            <!-- =================================================
+                 ДИСКИ
+                 ================================================= -->
+
+            <div class="panel glass">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            💾 Диски
+                        </h2>
+
+                        <span>
+                            STORAGE
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div id="disks">
+                    Загрузка...
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 СКРИНШОТ
+                 ================================================= -->
+
+            <div class="panel glass">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            📸 Экран
+                        </h2>
+
+                        <span>
+                            CAPTURE
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <p class="muted">
+                    Сделать снимок текущего экрана
+                    компьютера.
+                </p>
+
+                <button
+                    id="screenshotButton"
+                    class="primary-button"
+                >
+                    📸 Сделать скриншот
+                </button>
+
+                <img
+                    id="screenshot"
+                    class="screenshot hidden"
+                    alt="Скриншот компьютера"
+                >
+
+            </div>
+
+
+            <!-- =================================================
+                 СИСТЕМА
+                 ================================================= -->
+
+            <div class="panel glass">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            🧠 Система
+                        </h2>
+
+                        <span>
+                            SYSTEM
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="systemInfo"
+                    class="info-list"
+                >
+                    Загрузка...
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ПРОЦЕССЫ
+                 ================================================= -->
+
+            <div class="panel glass wide">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            ⚙️ Процессы
+                        </h2>
+
+                        <span>
+                            TOP 15
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>PID</th>
+                                <th>Процесс</th>
+                                <th>CPU</th>
+                                <th>RAM</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="processes">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 СЕТЬ
+                 ================================================= -->
+
+            <div class="panel glass">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            🌐 Сеть
+                        </h2>
+
+                        <span>
+                            NETWORK
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="network"
+                    class="info-list"
+                >
+                    Загрузка...
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ЖУРНАЛ
+                 ================================================= -->
+
+            <div class="panel glass">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            📋 Журнал
+                        </h2>
+
+                        <span>
+                            ACTIONS
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="log"
+                    class="log-list"
+                >
+                    Нет действий.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     УВЕДОМЛЕНИЯ
+     ========================================================= -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script src="/web/app.js"></script>
+
+</body>
+</html>
